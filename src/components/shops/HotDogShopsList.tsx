@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import hotDogShopsData from "../../data/hotDogShopsData";
 import Link from "next/link";
 import { HotDogShop } from "@/types/hotDogShops";
+import Image from "next/image";
 
 interface HotDogShopsListProps {
   isLoggedIn: boolean;
@@ -32,6 +33,13 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
                 <p onClick={() => handleClick(shop)}>{shop.name}</p>
               </Link>
               <p>{shop.address}</p>
+              <Image
+                src={shop.image}
+                alt={shop.name}
+                width={300}
+                height={200}
+                priority={true}
+              />
               {isLoggedIn ? (
                 <div>
                   <Link href="/update/[id]" as={`/update/${shop.id}`}>
