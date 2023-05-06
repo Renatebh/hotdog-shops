@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import hotDogShopsData from "../../data/hotDogShopsData";
 import Link from "next/link";
 import { HotDogShop } from "@/types/hotDogShops";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "../../global/store";
 
 interface HotDogShopsListProps {
   isLoggedIn: boolean;
 }
 
-const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
+const HotDogShopsList = ({}: HotDogShopsListProps) => {
+  const shops = useSelector((state: RootState) => state.shops.data);
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+  console.log(shops);
+
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
 
@@ -20,7 +25,7 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   return (
     <div>
       <ul>
-        {hotDogShopsData.map((shop) => {
+        {shops.map((shop) => {
           return (
             <li key={shop.id}>
               <Link
@@ -33,6 +38,7 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
                 <p onClick={() => handleClick(shop)}>{shop.name}</p>
               </Link>
               <p>{shop.address}</p>
+              <p>Rating: {shop.rating}</p>
               <Image
                 src={shop.image}
                 alt={shop.name}

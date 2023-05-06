@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Layout>
         <h1>Welcome to the hotdog shop locator</h1>
-        <LoginButton loggedIn={isLoggedIn} onLogInClick={handleLogInClick} />
+        <LoginButton onLogInClick={handleLogInClick} />
         <HotDogShopsList isLoggedIn={isLoggedIn} />
       </Layout>
     </>

@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateLoginStatus } from "@/global/store";
+import { RootState } from "../../global/store";
 
 interface LoginProps {
-  loggedIn: boolean;
   onLogInClick: () => void;
 }
 
-const LoginButton = ({ loggedIn, onLogInClick }: LoginProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(loggedIn);
+const LoginButton = ({ onLogInClick }: LoginProps) => {
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+  const dispatch = useDispatch();
+  const [buttonText, setButtonText] = useState("Login");
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setButtonText("Log out");
+    } else {
+      setButtonText("Login");
+    }
+  }, [isLoggedIn]);
 
   const handleLogInClick = () => {
-    setIsLoggedIn(!isLoggedIn);
+    dispatch(updateLoginStatus(!isLoggedIn));
     onLogInClick();
   };
 
   return (
     <>
-      <button onClick={handleLogInClick}>
-        {loggedIn ? (isLoggedIn ? "Log out" : "Logged in") : "Login"}
-      </button>
+      <button onClick={handleLogInClick}>{buttonText}</button>
       <div>{isLoggedIn ? "You are logged in" : ""}</div>
     </>
   );
