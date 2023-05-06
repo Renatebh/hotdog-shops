@@ -11,10 +11,12 @@ const LoginButton = ({ onLogInClick }: LoginProps) => {
   const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
   const dispatch = useDispatch();
   const [buttonText, setButtonText] = useState("Login");
+  const [loginText, setLoginText] = useState("");
 
   useEffect(() => {
     if (isLoggedIn) {
       setButtonText("Log out");
+      setLoginText("You are logged in!");
     } else {
       setButtonText("Login");
     }
@@ -28,7 +30,9 @@ const LoginButton = ({ onLogInClick }: LoginProps) => {
   return (
     <>
       <button onClick={handleLogInClick}>{buttonText}</button>
-      <div>{isLoggedIn ? "You are logged in" : ""}</div>
+      <div>
+        <p>{loginText}</p>
+      </div>
     </>
   );
 };

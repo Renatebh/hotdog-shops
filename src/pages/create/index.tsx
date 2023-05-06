@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addShops } from "../../global/ShopReducer";
 import { RootState } from "../../global/store";
 import { useRouter } from "next/router";
-import { ImageError } from "next/dist/server/image-optimizer";
 
 const ShopCreatePage = () => {
   const [name, setName] = useState("");
@@ -74,7 +73,6 @@ const ShopCreatePage = () => {
     setErrors(newErrors);
     if (!hasError) {
       router.push("/");
-      // perform form submission logic here
       dispatch(
         addShops({
           id: shops[shops.length - 1].id + 1,

@@ -12,7 +12,6 @@ interface HotDogShopsListProps {
 const HotDogShopsList = ({}: HotDogShopsListProps) => {
   const shops = useSelector((state: RootState) => state.shops.data);
   const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
-  console.log(shops);
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
@@ -49,7 +48,7 @@ const HotDogShopsList = ({}: HotDogShopsListProps) => {
               {isLoggedIn ? (
                 <div>
                   <Link href="/update/[id]" as={`/update/${shop.id}`}>
-                    Update Shop
+                    Edit Shop
                   </Link>
 
                   <Link href="/delete/[id]" as={`/delete/${shop.id}`}>
