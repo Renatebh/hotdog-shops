@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../global/store";
 import { deleteShop } from "../../global/ShopReducer";
+import { Rating } from "@mui/material";
 
 interface HotDogShopsListProps {
   isLoggedIn: boolean;
@@ -45,7 +46,12 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
                 <p onClick={() => handleClick(shop)}>{shop.name}</p>
               </Link>
               <p>{shop.address}</p>
-              <p>Rating: {shop.rating}</p>
+              <Rating
+                name="shop-rating"
+                value={shop.rating}
+                precision={0.1}
+                readOnly
+              />
               <Image
                 src={shop.image}
                 alt={shop.name}

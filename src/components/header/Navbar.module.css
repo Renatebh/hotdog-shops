@@ -1,0 +1,13 @@
+.menu-container {
+  background-color: var(--dark-yellow);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.basic-button {
+  color: black;
+}
+
+.menu-item {
+  color: black;
+}

@@ -73,14 +73,23 @@ const ShopUpdatePage = () => {
         </div>
         <div>
           <label htmlFor="rating">Rating: </label>
-          <input
-            type="number"
+          <select
             name="rating"
             id="rating"
-            placeholder={`${rating}`}
-            value={srating}
-            onChange={(e) => setRating(parseInt(e.target.value))}
-          />
+            onChange={(e) => setRating(parseFloat(e.target.value))}
+          >
+            <option value="">Select rating</option>
+            <option value="0.5">0.5</option>
+            <option value="1.0">1.0</option>
+            <option value="1.5">1.5</option>
+            <option value="2.0">2.0</option>
+            <option value="2.5">2.5</option>
+            <option value="3.0">3.0</option>
+            <option value="3.5">3.5</option>
+            <option value="4.0">4.0</option>
+            <option value="4.5">4.5</option>
+            <option value="5.0">5.0</option>
+          </select>
         </div>
         <div>
           <label htmlFor="latitude">Latitude: </label>
