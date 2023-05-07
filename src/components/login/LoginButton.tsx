@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 
 interface LoginProps {
   onLogInClick: () => void;
+  isLoggedIn: boolean;
 }
 
-const LoginButton = ({ onLogInClick }: LoginProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const LoginButton = ({ onLogInClick, isLoggedIn }: LoginProps) => {
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [buttonText, setButtonText] = useState("Login");
   const [loginText, setLoginText] = useState("");
 
-  useEffect(() => {
-    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    setIsLoggedIn(storedIsLoggedIn ? JSON.parse(storedIsLoggedIn) : false);
-  }, []);
+  console.log("LoginButton", isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -22,11 +20,9 @@ const LoginButton = ({ onLogInClick }: LoginProps) => {
       setButtonText("Login");
       setLoginText("");
     }
-    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
 
   const handleLogInClick = () => {
-    setIsLoggedIn(!isLoggedIn);
     onLogInClick();
   };
 

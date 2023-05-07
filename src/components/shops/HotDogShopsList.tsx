@@ -14,7 +14,7 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   const shops = useSelector((state: RootState) => state.shops.data);
   const dispatch = useDispatch();
 
-  // console.log(isLoggedIn);
+  console.log("HotDogShopsList", isLoggedIn);
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
