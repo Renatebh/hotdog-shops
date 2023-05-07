@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateLoginStatus } from "@/global/store";
-import { RootState } from "../../global/store";
 
 interface LoginProps {
   onLogInClick: () => void;
 }
 
 const LoginButton = ({ onLogInClick }: LoginProps) => {
-  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
-  const dispatch = useDispatch();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [buttonText, setButtonText] = useState("Login");
   const [loginText, setLoginText] = useState("");
+
+  useEffect(() => {
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(storedIsLoggedIn ? JSON.parse(storedIsLoggedIn) : false);
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -19,11 +20,13 @@ const LoginButton = ({ onLogInClick }: LoginProps) => {
       setLoginText("You are logged in!");
     } else {
       setButtonText("Login");
+      setLoginText("");
     }
+    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
 
   const handleLogInClick = () => {
-    dispatch(updateLoginStatus(!isLoggedIn));
+    setIsLoggedIn(!isLoggedIn);
     onLogInClick();
   };
 

@@ -12,9 +12,9 @@ export interface RootState {
   };
 }
 
-const isLoggedIn =
-  typeof window !== "undefined" &&
-  localStorage.getItem("isLoggedIn") === "true";
+// const isLoggedIn =
+//   typeof window !== "undefined" &&
+//   localStorage.getItem("isLoggedIn") === "true";
 
 export const UPDATE_LOGIN_STATUS = "UPDATE_LOGIN_STATUS";
 
@@ -39,7 +39,7 @@ const store = configureStore({
     shops: {
       data: hotDogShopsData,
     },
-    isLoggedIn: isLoggedIn,
+    isLoggedIn: false,
   },
 });
 

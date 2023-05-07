@@ -9,6 +9,7 @@ export default function Home() {
   const handleLogInClick = () => {
     setIsLoggedIn(!isLoggedIn);
   };
+
   return (
     <>
       <Layout>

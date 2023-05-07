@@ -9,9 +9,10 @@ interface HotDogShopsListProps {
   isLoggedIn: boolean;
 }
 
-const HotDogShopsList = ({}: HotDogShopsListProps) => {
+const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   const shops = useSelector((state: RootState) => state.shops.data);
-  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+
+  console.log(isLoggedIn);
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();

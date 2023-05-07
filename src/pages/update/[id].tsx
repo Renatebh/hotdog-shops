@@ -19,6 +19,15 @@ const ShopUpdatePage = () => {
   const [simage, setImage] = useState(image);
   const dispatch = useDispatch();
 
+  const handleImageChange = (event: any) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(`/images/${file.name}`);
+    };
+  };
+
   const handleUpdate = (event: any) => {
     event.preventDefault();
     router.push("/");
@@ -101,7 +110,7 @@ const ShopUpdatePage = () => {
             name="image"
             id="image"
             value=""
-            onChange={(e) => setImage(e.target.value)}
+            onChange={handleImageChange}
           />
         </div>
         <button type="submit">Update</button>
