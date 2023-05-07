@@ -12,10 +12,6 @@ export interface RootState {
   };
 }
 
-// const isLoggedIn =
-//   typeof window !== "undefined" &&
-//   localStorage.getItem("isLoggedIn") === "true";
-
 export const UPDATE_LOGIN_STATUS = "UPDATE_LOGIN_STATUS";
 
 export const updateLoginStatus = (isLoggedIn: boolean) => {

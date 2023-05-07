@@ -24,8 +24,15 @@ const shopSplice = createSlice({
         updatingShops.image = image;
       }
     },
+    deleteShop: (state, action) => {
+      const { id } = action.payload;
+      return {
+        ...state,
+        data: state.data.filter((shop) => shop.id !== id),
+      };
+    },
   },
 });
 
-export const { addShops, updateShops } = shopSplice.actions;
+export const { addShops, updateShops, deleteShop } = shopSplice.actions;
 export default shopSplice.reducer;

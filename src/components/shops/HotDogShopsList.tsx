@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { HotDogShop } from "@/types/hotDogShops";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../global/store";
+import { deleteShop } from "../../global/ShopReducer";
 
 interface HotDogShopsListProps {
   isLoggedIn: boolean;
@@ -11,8 +12,9 @@ interface HotDogShopsListProps {
 
 const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   const shops = useSelector((state: RootState) => state.shops.data);
+  const dispatch = useDispatch();
 
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
@@ -20,6 +22,10 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   const handleClick = (shop: HotDogShop) => {
     setLat(shop.latitude);
     setLng(shop.longitude);
+  };
+
+  const handleDelete = (id: any) => {
+    dispatch(deleteShop({ id: id }));
   };
 
   return (
@@ -52,9 +58,9 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
                     Edit Shop
                   </Link>
 
-                  <Link href="/delete/[id]" as={`/delete/${shop.id}`}>
+                  <button onClick={() => handleDelete(shop.id)}>
                     Delete Shop
-                  </Link>
+                  </button>
                 </div>
               ) : (
                 ""
