@@ -17,6 +17,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+      <h1>Welcome to the hotdog shop locator</h1>
       <main>{children}</main>
       <Footer />
     </>

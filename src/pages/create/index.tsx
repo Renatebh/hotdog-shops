@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addShops } from "../../global/ShopReducer";
 import { RootState } from "../../global/store";
 import { useRouter } from "next/router";
+import Layout from "@/components/layout/Layout";
 
 const ShopCreatePage = () => {
   const [name, setName] = useState("");
@@ -88,77 +89,79 @@ const ShopCreatePage = () => {
   };
 
   return (
-    <div>
-      <h2>Create a new shop</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name: </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Enter shop name"
-            onChange={(e) => setName(e.target.value)}
-          />
-          {errors.name && <span>{errors.name}</span>}
-        </div>
-        <div>
-          <label htmlFor="address">Address: </label>
-          <input
-            type="text"
-            name="address"
-            id="address"
-            placeholder="Enter shop adress"
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          {errors.address && <span>{errors.address}</span>}
-        </div>
-        <div>
-          <label htmlFor="rating">Rating: </label>
-          <input
-            type="number"
-            name="rating"
-            id="rating"
-            placeholder="Enter shop rating"
-            onChange={(e) => setRating(parseInt(e.target.value))}
-          />
-          {errors.rating && <span>{errors.rating}</span>}
-        </div>
-        <div>
-          <label htmlFor="latitude">Latitude: </label>
-          <input
-            type="number"
-            name="latitude"
-            id="latitude"
-            placeholder="Enter shop latitude"
-            onChange={(e) => setLatitude(parseFloat(e.target.value))}
-          />
-          {errors.latitude && <span>{errors.latitude}</span>}
-        </div>
-        <div>
-          <label htmlFor="longitude">Longitude: </label>
-          <input
-            type="number"
-            name="longitude"
-            id="longitude"
-            placeholder="Enter shop longitude"
-            onChange={(e) => setLongitude(parseFloat(e.target.value))}
-          />
-          {errors.longitude && <span>{errors.longitude}</span>}
-        </div>
-        <div>
-          <label htmlFor="image">Image: </label>
-          <input
-            type="file"
-            name="image"
-            id="image"
-            onChange={handleImageChange}
-          />
-          {errors.image && <span>{errors.image}</span>}
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <Layout>
+      <div>
+        <h2>Create a new shop</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Name: </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter shop name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            {errors.name && <span>{errors.name}</span>}
+          </div>
+          <div>
+            <label htmlFor="address">Address: </label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              placeholder="Enter shop adress"
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            {errors.address && <span>{errors.address}</span>}
+          </div>
+          <div>
+            <label htmlFor="rating">Rating: </label>
+            <input
+              type="number"
+              name="rating"
+              id="rating"
+              placeholder="Enter shop rating"
+              onChange={(e) => setRating(parseInt(e.target.value))}
+            />
+            {errors.rating && <span>{errors.rating}</span>}
+          </div>
+          <div>
+            <label htmlFor="latitude">Latitude: </label>
+            <input
+              type="number"
+              name="latitude"
+              id="latitude"
+              placeholder="Enter shop latitude"
+              onChange={(e) => setLatitude(parseFloat(e.target.value))}
+            />
+            {errors.latitude && <span>{errors.latitude}</span>}
+          </div>
+          <div>
+            <label htmlFor="longitude">Longitude: </label>
+            <input
+              type="number"
+              name="longitude"
+              id="longitude"
+              placeholder="Enter shop longitude"
+              onChange={(e) => setLongitude(parseFloat(e.target.value))}
+            />
+            {errors.longitude && <span>{errors.longitude}</span>}
+          </div>
+          <div>
+            <label htmlFor="image">Image: </label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              onChange={handleImageChange}
+            />
+            {errors.image && <span>{errors.image}</span>}
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </Layout>
   );
 };
 

@@ -6,21 +6,25 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    setIsLoggedIn(storedIsLoggedIn ? JSON.parse(storedIsLoggedIn) : false);
-    console.log("isLoggedIn Home", isLoggedIn);
-  }, [isLoggedIn]);
-
   const handleLogInClick = () => {
     setIsLoggedIn(!isLoggedIn);
   };
 
+  useEffect(() => {
+    const data = window.localStorage.getItem("IS_LOGGED_IN");
+    console.log("useeffecf data", data);
+    if (data !== null) {
+      setIsLoggedIn(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("IS_LOGGED_IN", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
+
   return (
     <>
       <Layout>
-        <h1>Welcome to the hotdog shop locator</h1>
         <LoginButton onLogInClick={handleLogInClick} isLoggedIn={isLoggedIn} />
         <HotDogShopsList isLoggedIn={isLoggedIn} />
       </Layout>

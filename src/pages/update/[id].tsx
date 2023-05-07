@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../global/store";
 import { useState } from "react";
 import { updateShops } from "../../global/ShopReducer";
+import Layout from "@/components/layout/Layout";
 
 const ShopUpdatePage = () => {
   const router = useRouter();
@@ -45,9 +46,9 @@ const ShopUpdatePage = () => {
   };
 
   return (
-    <div>
-      <h1>Update Shop {id}</h1>
+    <Layout>
       <form onSubmit={handleUpdate}>
+        <h1>Update Shop {id}</h1>
         <div>
           <label htmlFor="name">Name: </label>
           <input
@@ -115,7 +116,7 @@ const ShopUpdatePage = () => {
         </div>
         <button type="submit">Update</button>
       </form>
-    </div>
+    </Layout>
   );
 };
 

@@ -14,7 +14,7 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   const shops = useSelector((state: RootState) => state.shops.data);
   const dispatch = useDispatch();
 
-  console.log("HotDogShopsList", isLoggedIn);
+  // console.log("HotDogShopsList", isLoggedIn);
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
@@ -30,6 +30,7 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
 
   return (
     <div>
+      {isLoggedIn ? <Link href="/create">Add new Shop</Link> : ""}
       <ul>
         {shops.map((shop) => {
           return (
@@ -68,7 +69,6 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
             </li>
           );
         })}
-        {isLoggedIn ? <Link href="/create">Add new Shop</Link> : ""}
       </ul>
     </div>
   );
