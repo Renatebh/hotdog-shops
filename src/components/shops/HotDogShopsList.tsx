@@ -7,7 +7,10 @@ import { RootState } from "../../global/store";
 import { deleteShop } from "../../global/ShopReducer";
 import { Rating } from "@mui/material";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import styles from "./HotDogShopsList.module.css";
+import { FaSearch } from "react-icons/fa";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const HotDogShopsList = () => {
   const shops = useSelector((state: RootState) => state.shops.data);
@@ -16,6 +19,7 @@ const HotDogShopsList = () => {
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleClick = (shop: HotDogShop) => {
     setLat(shop.latitude);
@@ -26,8 +30,28 @@ const HotDogShopsList = () => {
     dispatch(deleteShop({ id: id }));
   };
 
+  const filteredShops = shops.filter((shop) =>
+    `${shop.name} ${shop.address}`
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className={styles["shops-list-container"]}>
+      <div className={styles["search-container"]}>
+        <TextField
+          label="Search Hot Dog Shops"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <FaSearch />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </div>
       <div className={styles["crate-button-wrapper"]}>
         {isLoggedIn ? (
           <Link href="/create">
@@ -38,7 +62,7 @@ const HotDogShopsList = () => {
         )}
       </div>
       <div className={styles["card-container"]}>
-        {shops.map((shop) => {
+        {filteredShops.map((shop) => {
           return (
             <div key={shop.id} className={styles["shops-card"]}>
               <Link
