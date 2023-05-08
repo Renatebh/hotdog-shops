@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { HotDogShop } from "@/types/hotDogShops";
 import Image from "next/image";
+import { HotDogShop } from "@/types/hotDogShops";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../global/store";
 import { deleteShop } from "../../global/ShopReducer";
 import { Rating } from "@mui/material";
+import Button from "@mui/material/Button";
+import styles from "./HotDogShopsList.module.css";
 
-interface HotDogShopsListProps {
-  isLoggedIn: boolean;
-}
-
-const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
+const HotDogShopsList = () => {
   const shops = useSelector((state: RootState) => state.shops.data);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
-
-  // console.log("HotDogShopsList", isLoggedIn);
 
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
@@ -30,12 +27,20 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
   };
 
   return (
-    <div>
-      {isLoggedIn ? <Link href="/create">Add new Shop</Link> : ""}
-      <ul>
+    <div className={styles["shops-list-container"]}>
+      <div className={styles["crate-button-wrapper"]}>
+        {isLoggedIn ? (
+          <Link href="/create">
+            <Button variant="contained">Add new Shop</Button>
+          </Link>
+        ) : (
+          ""
+        )}
+      </div>
+      <div className={styles["card-container"]}>
         {shops.map((shop) => {
           return (
-            <li key={shop.id}>
+            <div key={shop.id} className={styles["shops-card"]}>
               <Link
                 href={{
                   pathname: "/map",
@@ -43,9 +48,14 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
                 }}
               >
                 {" "}
-                <p onClick={() => handleClick(shop)}>{shop.name}</p>
+                <h3
+                  onClick={() => handleClick(shop)}
+                  className={styles["shop-name"]}
+                >
+                  {shop.name}
+                </h3>
               </Link>
-              <p>{shop.address}</p>
+              <p className={styles["shop-address"]}>{shop.address}</p>
               <Rating
                 name="shop-rating"
                 value={shop.rating}
@@ -58,24 +68,36 @@ const HotDogShopsList = ({ isLoggedIn }: HotDogShopsListProps) => {
                 width={300}
                 height={200}
                 priority={true}
+                className={styles["shop-image"]}
               />
               {isLoggedIn ? (
-                <div>
+                <div className={styles["links-container"]}>
                   <Link href="/update/[id]" as={`/update/${shop.id}`}>
-                    Edit Shop
+                    <Button
+                      variant="outlined"
+                      className={styles["edit-button"]}
+                    >
+                      {" "}
+                      Edit Shop
+                    </Button>
                   </Link>
-
-                  <button onClick={() => handleDelete(shop.id)}>
-                    Delete Shop
-                  </button>
+                  <div>
+                    <Button
+                      onClick={() => handleDelete(shop.id)}
+                      variant="contained"
+                      className={styles["delete-button"]}
+                    >
+                      Delete shop
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 ""
               )}
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };

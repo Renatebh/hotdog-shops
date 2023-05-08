@@ -4,38 +4,29 @@ import { configureStore } from "@reduxjs/toolkit";
 import ShopReducer from "./ShopReducer";
 import { HotDogShop } from "@/types/hotDogShops";
 import hotDogShopsData from "../data/hotDogShopsData";
+import AuthReducer from "./AuthReducer";
 
 export interface RootState {
-  isLoggedIn: boolean;
+  auth: {
+    isLoggedIn: boolean;
+  };
   shops: {
     data: HotDogShop[];
   };
 }
 
-export const UPDATE_LOGIN_STATUS = "UPDATE_LOGIN_STATUS";
-
-export const updateLoginStatus = (isLoggedIn: boolean) => {
-  return {
-    type: UPDATE_LOGIN_STATUS,
-    payload: isLoggedIn,
-  };
-};
-
 const store = configureStore({
   reducer: {
+    auth: AuthReducer,
     shops: ShopReducer,
-    isLoggedIn: (state = false, action) => {
-      if (action.type === UPDATE_LOGIN_STATUS) {
-        return action.payload;
-      }
-      return state;
-    },
   },
   preloadedState: {
+    auth: {
+      isLoggedIn: false,
+    },
     shops: {
       data: hotDogShopsData,
     },
-    isLoggedIn: false,
   },
 });
 

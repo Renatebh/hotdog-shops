@@ -1,7 +1,20 @@
 .menu-container {
   background-color: var(--dark-yellow);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+}
+
+.home-link {
+  color: black;
+  margin-left: 10px;
+}
+
+.menu-right-side {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
 .basic-button {
@@ -10,4 +23,11 @@
 
 .menu-item {
   color: black;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  text-decoration: underline;
 }

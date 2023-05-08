@@ -15,22 +15,24 @@ export const Map = ({ hotDogShops }: MapProps) => {
   const { lat, lng } = router.query;
 
   return (
-    <MapContainer
-      center={[Number(lat) || center[0], Number(lng) || center[1]]}
-      zoom={13}
-      style={{ height: "600px" }}
-      className={styles.map}
-    >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {hotDogShops.map((shop) => (
-        <Marker position={[shop.latitude, shop.longitude]} key={shop.id}>
-          <Popup>
-            <h3>{shop.name}</h3>
-            <p>{shop.address}</p>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <div className={styles["map-wrapper"]}>
+      <MapContainer
+        center={[Number(lat) || center[0], Number(lng) || center[1]]}
+        zoom={13}
+        style={{ height: "600px" }}
+        className={styles.map}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {hotDogShops.map((shop) => (
+          <Marker position={[shop.latitude, shop.longitude]} key={shop.id}>
+            <Popup>
+              <h3>{shop.name}</h3>
+              <p>{shop.address}</p>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 };
 

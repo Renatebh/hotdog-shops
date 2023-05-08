@@ -4,11 +4,13 @@ import { addShops } from "../../global/ShopReducer";
 import { RootState } from "../../global/store";
 import { useRouter } from "next/router";
 import Layout from "@/components/layout/Layout";
+import { TextField, Button } from "@mui/material";
+import styles from "../update/update.module.css";
 
 const ShopCreatePage = () => {
   const [name, setName] = useState("");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [address, setAddress] = useState("");
   const [rating, setRating] = useState(0);
   const [image, setImage] = useState("");
@@ -17,15 +19,6 @@ const ShopCreatePage = () => {
   const shops = useSelector((state: RootState) => state.shops.data);
 
   const dispatch = useDispatch();
-
-  const [errors, setErrors] = useState({
-    name: "",
-    address: "",
-    rating: "",
-    latitude: "",
-    longitude: "",
-    image: "",
-  });
 
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
@@ -38,86 +31,73 @@ const ShopCreatePage = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    const newErrors = {
-      name: "",
-      address: "",
-      rating: "",
-      latitude: "",
-      longitude: "",
-      image: "",
-    };
-    let hasError = false;
-    if (!name) {
-      newErrors.name = "Name is required";
-      hasError = true;
-    }
-    if (!address) {
-      newErrors.address = "Address is required";
-      hasError = true;
-    }
-    if (!rating) {
-      newErrors.rating = "Rating is required";
-      hasError = true;
-    }
-    if (!latitude) {
-      newErrors.latitude = "Latitude is required";
-      hasError = true;
-    }
-    if (!longitude) {
-      newErrors.longitude = "Longitude is required";
-      hasError = true;
-    }
-    if (!image) {
-      newErrors.image = "Image is required";
-      hasError = true;
-    }
-    setErrors(newErrors);
-    if (!hasError) {
-      router.push("/");
-      dispatch(
-        addShops({
-          id: shops[shops.length - 1].id + 1,
-          name,
-          address,
-          rating,
-          latitude,
-          longitude,
-          image,
-        })
-      );
-    }
+    router.push("/");
+    dispatch(
+      addShops({
+        id: shops[shops.length - 1].id + 1,
+        name,
+        address,
+        rating,
+        latitude,
+        longitude,
+        image,
+      })
+    );
   };
 
   return (
     <Layout>
-      <div>
-        <h2>Create a new shop</h2>
-        <form onSubmit={handleSubmit}>
+      <div className={styles["form-container"]}>
+        <form onSubmit={handleSubmit} className={styles["update-form"]}>
+          <h2>Create a new shop</h2>
           <div>
-            <label htmlFor="name">Name: </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Enter shop name"
+            <TextField
+              label="Name"
+              variant="outlined"
+              fullWidth
+              value={name}
               onChange={(e) => setName(e.target.value)}
+              margin="normal"
+              required
             />
-            {errors.name && <span>{errors.name}</span>}
           </div>
           <div>
-            <label htmlFor="address">Address: </label>
-            <input
-              type="text"
-              name="address"
-              id="address"
-              placeholder="Enter shop adress"
+            <TextField
+              label="Address"
+              variant="outlined"
+              fullWidth
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
+              margin="normal"
+              required
             />
-            {errors.address && <span>{errors.address}</span>}
+          </div>
+
+          <div>
+            <TextField
+              label="Latitude"
+              variant="outlined"
+              fullWidth
+              value={latitude}
+              onChange={(e) => setLatitude(e.target.value)}
+              margin="normal"
+              required
+            />
           </div>
           <div>
-            <label htmlFor="rating">Rating: </label>
+            <TextField
+              label="Longitude"
+              variant="outlined"
+              fullWidth
+              value={longitude}
+              onChange={(e) => setLongitude(e.target.value)}
+              margin="normal"
+              required
+            />
+          </div>
+          <div className={styles["select-container"]}>
             <select
+              className={styles["select-rating"]}
               name="rating"
               id="rating"
               onChange={(e) => setRating(parseFloat(e.target.value))}
@@ -134,41 +114,19 @@ const ShopCreatePage = () => {
               <option value="4.5">4.5</option>
               <option value="5.0">5.0</option>
             </select>
-            {errors.rating && <span>{errors.rating}</span>}
-          </div>
-          <div>
-            <label htmlFor="latitude">Latitude: </label>
+
+            <label htmlFor="image">Select mage: </label>
             <input
-              type="number"
-              name="latitude"
-              id="latitude"
-              placeholder="Enter shop latitude"
-              onChange={(e) => setLatitude(parseFloat(e.target.value))}
-            />
-            {errors.latitude && <span>{errors.latitude}</span>}
-          </div>
-          <div>
-            <label htmlFor="longitude">Longitude: </label>
-            <input
-              type="number"
-              name="longitude"
-              id="longitude"
-              placeholder="Enter shop longitude"
-              onChange={(e) => setLongitude(parseFloat(e.target.value))}
-            />
-            {errors.longitude && <span>{errors.longitude}</span>}
-          </div>
-          <div>
-            <label htmlFor="image">Image: </label>
-            <input
+              className={styles["select-image"]}
               type="file"
               name="image"
               id="image"
               onChange={handleImageChange}
             />
-            {errors.image && <span>{errors.image}</span>}
           </div>
-          <button type="submit">Submit</button>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
         </form>
       </div>
     </Layout>

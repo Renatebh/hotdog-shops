@@ -1,19 +1,20 @@
-import { UPDATE_LOGIN_STATUS } from "./store";
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  isLoggedIn: false,
-};
+export const authSlice = createSlice({
+  name: "auth",
+  initialState: {
+    isLoggedIn: false,
+  },
+  reducers: {
+    login: (state) => {
+      state.isLoggedIn = true;
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+    },
+  },
+});
 
-const authReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case UPDATE_LOGIN_STATUS:
-      return {
-        ...state,
-        isLoggedIn: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+export const { login, logout } = authSlice.actions;
 
-export default authReducer;
+export default authSlice.reducer;

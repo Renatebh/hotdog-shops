@@ -1,0 +1,10 @@
+.title-wrapper {
+  width: 100%;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.title {
+  font-family: var(--second-font);
+  font-size: 62px;
+}

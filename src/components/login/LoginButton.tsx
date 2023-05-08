@@ -1,38 +1,39 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../global/store";
+import { login, logout } from "../../global/AuthReducer";
+import Button from "@mui/material/Button";
 
-interface LoginProps {
-  onLogInClick: () => void;
-  isLoggedIn: boolean;
-}
-
-const LoginButton = ({ onLogInClick, isLoggedIn }: LoginProps) => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+const LoginButton = () => {
   const [buttonText, setButtonText] = useState("Login");
-  const [loginText, setLoginText] = useState("");
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
-  console.log("LoginButton", isLoggedIn);
+  const handleLogin = () => {
+    dispatch(login());
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
       setButtonText("Log out");
-      setLoginText("You are logged in!");
     } else {
       setButtonText("Login");
-      setLoginText("");
     }
   }, [isLoggedIn]);
 
-  const handleLogInClick = () => {
-    onLogInClick();
-  };
-
   return (
-    <>
-      <button onClick={handleLogInClick}>{buttonText}</button>
-      <div>
-        <p>{loginText}</p>
-      </div>
-    </>
+    <div>
+      <Button
+        onClick={isLoggedIn ? handleLogout : handleLogin}
+        variant="contained"
+      >
+        {buttonText}
+      </Button>
+    </div>
   );
 };
 

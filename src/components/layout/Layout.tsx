@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import Footer from "../footer/Footer";
 import Navbar from "../header/Navbar";
 import Head from "next/head";
+import Title from "../title/Title";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -16,8 +17,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Navbar />
-      <h1>Hotdog shop locator New York</h1>
+      <Title />
       <main>{children}</main>
       <Footer />
     </>
