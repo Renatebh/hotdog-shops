@@ -7,8 +7,11 @@ import styles from "./Navbar.module.css";
 import { AiFillHome } from "react-icons/Ai";
 import { GiHamburgerMenu } from "react-icons/Gi";
 import LoginButton from "../login/LoginButton";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../global/store";
 
 const Navbar = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -57,6 +60,16 @@ const Navbar = () => {
             View Map
           </Link>
         </MenuItem>
+        {isLoggedIn ? (
+          <MenuItem onClick={handleClose}>
+            {" "}
+            <Link href={"/crate"} className={styles["menu-item"]}>
+              Add new shop
+            </Link>
+          </MenuItem>
+        ) : (
+          ""
+        )}
       </Menu>
     </div>
   );

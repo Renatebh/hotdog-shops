@@ -6,5 +6,5 @@
 
 .title {
   font-family: var(--second-font);
-  font-size: 62px;
+  font-size: var(--h--step-3);
 }
