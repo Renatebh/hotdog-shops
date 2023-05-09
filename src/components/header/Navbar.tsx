@@ -7,7 +7,7 @@ import styles from "./Navbar.module.css";
 import { AiFillHome } from "react-icons/Ai";
 import { GiHamburgerMenu } from "react-icons/Gi";
 import LoginButton from "../login/LoginButton";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../global/store";
 
 const Navbar = () => {
@@ -63,7 +63,7 @@ const Navbar = () => {
         {isLoggedIn ? (
           <MenuItem onClick={handleClose}>
             {" "}
-            <Link href={"/crate"} className={styles["menu-item"]}>
+            <Link href={"/create"} className={styles["menu-item"]}>
               Add new shop
             </Link>
           </MenuItem>

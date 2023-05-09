@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../global/store";
 import { login, logout } from "../../global/AuthReducer";
+import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
 
 const LoginButton = () => {
@@ -9,12 +10,15 @@ const LoginButton = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
+  const router = useRouter();
+
   const handleLogin = () => {
     dispatch(login());
   };
 
   const handleLogout = () => {
     dispatch(logout());
+    router.push("/");
   };
 
   useEffect(() => {

@@ -66,12 +66,12 @@ const hotDogShopsData: HotDogShop[] = [
   },
   {
     id: 8,
-    name: "Poppey's Wiener",
+    name: "Poppey's Best Wieners",
     latitude: 40.7717329,
     longitude: -73.9826548,
     address: "2090 Broadway, New York, NY 10023",
     rating: 4.1,
-    image: "/images/hotdog-shop-8.jpg",
+    image: "/images/hotdog-shop-9.jpg",
   },
 ];
 
