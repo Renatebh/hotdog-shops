@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import styles from "./Navbar.module.css";
-// import { AiFillHome } from "react-icons/Ai";
+import { AiFillHome } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/Gi";
 import LoginButton from "../login/LoginButton";
 import { useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <div className={styles["menu-container"]}>
       <Link href="/" className={styles["home-link"]}>
-        {/* <AiFillHome size={40} /> */}
+        <AiFillHome size={40} />
         Home
       </Link>
       <div className={styles["menu-right-side"]}>
