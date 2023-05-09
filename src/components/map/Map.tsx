@@ -2,16 +2,11 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { LatLngExpression } from "leaflet";
-// import { HotDogShop } from "@/types/hotDogShops";
 import { useRouter } from "next/router";
 import styles from "./Map.module.css";
 import hotDogIcon from "../../../public/hotdog.ico.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../global/store";
-
-// export interface MapProps {
-//   hotDogShops: HotDogShop[];
-// }
 
 export const Map = () => {
   const shops = useSelector((state: RootState) => state.shops.data);

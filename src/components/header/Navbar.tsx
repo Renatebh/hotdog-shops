@@ -26,7 +26,6 @@ const Navbar = () => {
     <div className={styles["menu-container"]}>
       <Link href="/" className={styles["home-link"]}>
         <AiFillHome size={40} />
-        Home
       </Link>
       <div className={styles["menu-right-side"]}>
         <LoginButton />
