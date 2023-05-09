@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import styles from "./Navbar.module.css";
 import { AiFillHome } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/Gi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import LoginButton from "../login/LoginButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../global/store";
